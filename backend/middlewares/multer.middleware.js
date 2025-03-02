@@ -13,7 +13,7 @@ cloudinary.config({
 
 // Set up multer to use memory storage
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+export const upload = multer({ storage: storage });
 
 // Function to upload to Cloudinary
 export const uploadOnCloudinary = async (file) => {
@@ -43,19 +43,3 @@ export const uploadOnCloudinary = async (file) => {
     throw new Error("Upload failed");
   }
 };
-
-// API route example
-export default async function handler(req, res) {
-  upload.single('uploadedFile')(req, res, async (err) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error uploading file' });
-    }
-
-    try {
-      const result = await uploadOnCloudinary(req.file);
-      return res.status(200).json({ message: 'File uploaded successfully', file: result });
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
-    }
-  });
-}
