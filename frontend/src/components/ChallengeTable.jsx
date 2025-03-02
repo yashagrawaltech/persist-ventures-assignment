@@ -45,7 +45,7 @@ const DialogBtn = ({ children, id }) => {
 
     setLoading(true);
     await fetch(
-      `${import.meta.env.VITE_BACKEND_URLL}/admin/change-challenge-status/${id}`,
+      `${import.meta.env.VITE_BACKEND_URL}/admin/change-challenge-status/${id}`,
       {
         method: "POST",
         headers: {
