@@ -182,7 +182,7 @@ const Section4 = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_FRONTEND_URL}/admin/get-challenges/?status=active`
+        `${import.meta.env.VITE_BACKEND_URL}/admin/get-challenges/?status=active`
       );
       const data = await response.json();
       return data;
@@ -296,7 +296,7 @@ const Section7 = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_FRONTEND_URL}/admin/get-persons`
+        `${import.meta.env.VITE_BACKEND_URL}/admin/get-persons`
       );
       const data = await response.json();
       return data;
@@ -342,7 +342,7 @@ const Section8 = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_FRONTEND_URL}/admin/get-founders`
+        `${import.meta.env.VITE_BACKEND_URL}/admin/get-founders`
       );
       const data = await response.json();
       return data;

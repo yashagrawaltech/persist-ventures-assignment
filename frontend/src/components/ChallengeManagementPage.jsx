@@ -70,7 +70,7 @@ const DialogBtn = ({ children }) => {
       }
 
       const response = await fetch(
-        `${import.meta.env.VITE_FRONTEND_URL}/admin/create-challenge/`,
+        `${import.meta.env.VITE_BACKEND_URL}/admin/create-challenge/`,
         {
           method: "POST",
           body: data, // Send FormData directly
