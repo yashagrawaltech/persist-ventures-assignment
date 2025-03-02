@@ -13,11 +13,7 @@ const PORT = process.env.PORT ?? 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({
-  origin: ['https://persist-ventures-assignment-kappa.vercel.app'],
-  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'], // Allow these HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
-}));
+app.use(cors());
 
 // DB Config
 connectToMongoDB(`${process.env.Mongo_URI}/${process.env.DB_NAME}`);
