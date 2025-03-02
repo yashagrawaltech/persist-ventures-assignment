@@ -25,21 +25,22 @@ export const uploadOnCloudinary = async (file) => {
     stream.push(file.buffer);
     stream.push(null); // Signal the end of the stream
 
-    const response = await cloudinary.v2.uploader.upload_stream(
-      { resource_type: "auto" },
-      (error, result) => {
-        if (error) {
-          throw new Error("Upload failed");
+    // Return a Promise that resolves with the upload result
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.v2.uploader.upload_stream(
+        { resource_type: "auto" },
+        (error, result) => {
+          if (error) {
+            return reject(new Error("Upload failed: " + error.message));
+          }
+          resolve(result);
         }
-        return result;
-      }
-    );
+      );
 
-    // Pipe the stream to Cloudinary
-    stream.pipe(response);
-
-    return response;
+      // Pipe the stream to Cloudinary
+      stream.pipe(uploadStream);
+    });
   } catch (error) {
-    throw new Error("Upload failed");
+    throw new Error("Upload failed: " + error.message);
   }
 };
