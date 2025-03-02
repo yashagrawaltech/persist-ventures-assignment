@@ -1,9 +1,9 @@
 import { validationResult } from "express-validator";
 import { Challenge } from "../models/challenge.model.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { Founder } from "../models/founder.model.js";
 import { Company } from "../models/company.model.js";
 import { People } from "../models/people.model.js";
+import { uploadOnCloudinary } from "../middlewares/multer.middleware.js";
 
 export const createChallenge = async (req, res, next) => {
   const errors = validationResult(req);
@@ -18,7 +18,7 @@ export const createChallenge = async (req, res, next) => {
   if (!image) return res.status(401).json({ message: "image is required" });
 
   try {
-    const response = await uploadOnCloudinary(image["path"]);
+    const response = await uploadOnCloudinary(image);
 
     if (!response)
       return res.status(500).json({ message: "internal server error" });
@@ -54,7 +54,7 @@ export const addFounder = async (req, res, next) => {
   if (!image) return res.status(401).json({ message: "image is required" });
 
   try {
-    const response = await uploadOnCloudinary(image["path"]);
+    const response = await uploadOnCloudinary(image);
 
     if (!response)
       return res.status(500).json({ message: "internal server error" });
@@ -89,7 +89,7 @@ export const addCompany = async (req, res, next) => {
   if (!image) return res.status(401).json({ message: "image is required" });
 
   try {
-    const response = await uploadOnCloudinary(image["path"]);
+    const response = await uploadOnCloudinary(image);
 
     if (!response)
       return res.status(500).json({ message: "internal server error" });
@@ -129,7 +129,7 @@ export const addPerson = async (req, res, next) => {
   if (!image) return res.status(401).json({ message: "image is required" });
 
   try {
-    const response = await uploadOnCloudinary(image["path"]);
+    const response = await uploadOnCloudinary(image);
 
     if (!response)
       return res.status(500).json({ message: "internal server error" });
